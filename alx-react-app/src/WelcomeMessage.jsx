@@ -1,10 +1,10 @@
 function WelcomeMessage() {
     return (
-      <div>
-        <h2>Welcome to the Vite + React app!</h2>;
-        <p>This is a simple React app powered by Vite.</p>
-      </div>
+        <div>
+            <h1>"Hello everyone, I am learning React at ALX!".</h1>
+            <p>"I am learning about JSX!".</p>
+        </div>
     );
-  }
-  
-  export default WelcomeMessage;
+}
+
+export default WelcomeMessage;
