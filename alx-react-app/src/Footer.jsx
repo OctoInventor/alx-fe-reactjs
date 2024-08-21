@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FavoriteCitiesFooter () {
+function Footer () {
     return (
         <footer>
         <p>© 2023 City Lovers</p>
@@ -8,4 +8,4 @@ function FavoriteCitiesFooter () {
     );
   };
   
-  export default FavoriteCitiesFooter;
+  export default Footer;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FavoriteCitiesMain () {
+function Main () {
     return (
       <main>
       <p>I love to visit New York, Paris, and Tokyo.</p>
@@ -8,4 +8,4 @@ function FavoriteCitiesMain () {
     );
   };
   
-  export default FavoriteCitiesHeader;
+  export default Main;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FavoriteCitiesHeader () {
+function Header () {
     return (
       <header>
         <h1>My Favorite Cities</h1>
@@ -8,4 +8,4 @@ function FavoriteCitiesHeader () {
     );
   };
   
-  export default FavoriteCitiesHeader;
+  export default Header;
