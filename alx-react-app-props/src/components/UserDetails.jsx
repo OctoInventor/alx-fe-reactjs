@@ -8,7 +8,7 @@ const UserDetails = () => {
   return (
     <div>
       <h2>User Details</h2>
-      <UserInfo userData={userData} />
+      <UserInfo />
     </div>
   );
 };
