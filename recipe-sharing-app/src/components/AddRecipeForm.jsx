@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 
 function AddRecipeForm({ addRecipe }) {
+  const [title, setTitle] = useState('');  // State for recipe title
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addRecipe({ name, description });
+    addRecipe({ title, name, description });  // Include title in the recipe object
+    setTitle('');  // Clear the title field after submission
     setName('');
     setDescription('');
   };
@@ -14,6 +16,15 @@ function AddRecipeForm({ addRecipe }) {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Add a New Recipe</h2>
+      <div>
+        <label>Recipe Title:</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}  // Update title state on input change
+          required
+        />
+      </div>
       <div>
         <label>Recipe Name:</label>
         <input
