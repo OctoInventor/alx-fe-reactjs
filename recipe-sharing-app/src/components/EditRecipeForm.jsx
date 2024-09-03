@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import useRecipeStore from './recipeStore';  // Import useRecipeStore
 
-const EditRecipeForm = ({ recipe, onSave }) => {
+const EditRecipeForm = ({ recipe }) => {
   const [editedRecipe, setEditedRecipe] = useState(recipe);
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);  // Access the updateRecipe action from Zustand store
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -9,9 +11,10 @@ const EditRecipeForm = ({ recipe, onSave }) => {
     setEditedRecipe({ ...editedRecipe, [name]: value });
   };
 
-  // Handle form submission without preventDefault or Zustand
-  const handleSubmit = () => {
-    onSave(editedRecipe);  // Call the onSave prop with the updated recipe
+  // Handle form submission with preventDefault and Zustand action
+  const handleSubmit = (e) => {
+    e.preventDefault();  // Prevent default form submission behavior
+    updateRecipe(editedRecipe);  // Update the recipe in the Zustand store
   };
 
   return (
@@ -25,10 +28,11 @@ const EditRecipeForm = ({ recipe, onSave }) => {
             name="name"
             value={editedRecipe.name}
             onChange={handleInputChange}
+            required
           />
         </label>
         {/* Other input fields for ingredients, instructions, etc. */}
-        <button type="button" onClick={handleSubmit}>Save Changes</button>
+        <button type="submit">Save Changes</button>
       </form>
     </div>
   );
