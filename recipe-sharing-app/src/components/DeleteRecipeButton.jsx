@@ -1,10 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import useRecipeStore from './recipeStore';    // Import useRecipeStore from your Zustand store
 
-const DeleteRecipeButton = ({ recipeId, onDelete }) => {
+const DeleteRecipeButton = ({ recipeId }) => {
+  const navigate = useNavigate(); // Initialize useNavigate
+  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe); // Access deleteRecipe action from Zustand
+
   const handleDelete = () => {
-    // Perform the actual deletion (you can use Zustand actions or API calls here)
-    // Pass the recipeId to the onDelete callback
-    onDelete(recipeId);
+    deleteRecipe(recipeId);     // Call deleteRecipe action with the recipeId
+    navigate('/');             // Navigate to the home page or another route after deletion
   };
 
   return (
