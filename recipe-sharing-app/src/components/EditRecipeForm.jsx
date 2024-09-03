@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const EditRecipeForm = ({ recipe }) => {
+const EditRecipeForm = ({ recipe, onSave }) => {
   const [editedRecipe, setEditedRecipe] = useState(recipe);
 
   // Handle form input changes
@@ -9,12 +9,15 @@ const EditRecipeForm = ({ recipe }) => {
     setEditedRecipe({ ...editedRecipe, [name]: value });
   };
 
-  // Handle form submission (you can use Zustand actions or API calls here)
+  // Handle form submission without preventDefault or Zustand
+  const handleSubmit = () => {
+    onSave(editedRecipe);  // Call the onSave prop with the updated recipe
+  };
 
   return (
     <div>
       <h2>Edit Recipe</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Recipe Name:
           <input
@@ -25,7 +28,7 @@ const EditRecipeForm = ({ recipe }) => {
           />
         </label>
         {/* Other input fields for ingredients, instructions, etc. */}
-        <button type="submit">Save Changes</button>
+        <button type="button" onClick={handleSubmit}>Save Changes</button>
       </form>
     </div>
   );
