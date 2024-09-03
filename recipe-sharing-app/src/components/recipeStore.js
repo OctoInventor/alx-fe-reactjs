@@ -10,8 +10,15 @@ const useRecipeStore = create((set) => ({
     }));
   },
 
+  // Action to set a new list of recipes
+  setRecipes: (newRecipes) => {
+    set({ recipes: newRecipes });
+  },
+
   // Action to initialize the list (you can fetch data here if needed)
   initializeRecipes: (initialRecipes) => {
     set({ recipes: initialRecipes });
   },
 }));
+
+export default useRecipeStore;
