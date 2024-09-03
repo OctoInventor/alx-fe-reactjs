@@ -1,7 +1,7 @@
 import create from 'zustand';
 
 const useRecipeStore = create((set) => ({
-  recipes: [], // Initial empty array for recipes
+  recipes: [],
 
   // Action to add a new recipe
   addRecipe: (newRecipe) => {
@@ -10,12 +10,22 @@ const useRecipeStore = create((set) => ({
     }));
   },
 
-  // Action to set a new list of recipes
-  setRecipes: (newRecipes) => {
-    set({ recipes: newRecipes });
+  // Action to delete a recipe by ID
+  deleteRecipe: (recipeId) => {
+    set((state) => ({
+      recipes: state.recipes.filter((recipe) => recipe.id !== recipeId),
+    }));
   },
 
-  // Action to initialize the list (you can fetch data here if needed)
+  // Action to update a recipe by ID
+  updateRecipe: (updatedRecipe) => {
+    set((state) => ({
+      recipes: state.recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      ),
+    }));
+  },
+
   initializeRecipes: (initialRecipes) => {
     set({ recipes: initialRecipes });
   },
