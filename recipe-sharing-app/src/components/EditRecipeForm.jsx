@@ -13,7 +13,7 @@ const EditRecipeForm = ({ recipe }) => {
 
   // Handle form submission with preventDefault and Zustand action
   const handleSubmit = (e) => {
-    e.preventDefault();  // Prevent default form submission behavior
+    event.preventDefault();  // Prevent default form submission behavior
     updateRecipe(editedRecipe);  // Update the recipe in the Zustand store
   };
 
