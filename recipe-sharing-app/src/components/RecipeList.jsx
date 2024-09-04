@@ -1,7 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link for navigation
+import useRecipeStore from './recipeStore'; // Import useRecipeStore for accessing the store
 
-// Assuming filteredRecipes is a prop
 const RecipeList = ({ filteredRecipes = [] }) => {
+  const { deleteRecipe } = useRecipeStore((state) => ({
+    deleteRecipe: state.deleteRecipe,
+  }));
+
+  const handleDelete = (id) => {
+    deleteRecipe(id); // Call the deleteRecipe action from Zustand store
+  };
+
   return (
     <div>
       <h2>Recipe List</h2>
@@ -35,6 +44,8 @@ const RecipeList = ({ filteredRecipes = [] }) => {
           <li key={index}>
             <h3>{recipe.name}</h3>
             <p>{recipe.description}</p>
+            <button onClick={() => handleDelete(recipe.id)}>Delete</button> {/* Add a delete button */}
+            <Link to={`/edit/${recipe.id}`}>Edit</Link> {/* Link to the EditRecipeForm component */}
           </li>
         ))}
       </ul>
