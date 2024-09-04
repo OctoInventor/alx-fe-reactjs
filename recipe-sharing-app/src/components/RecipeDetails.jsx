@@ -1,18 +1,22 @@
-  // RecipeDetails component
-  import { useRecipeStore } from './recipeStore';
+import React from 'react';
+import useRecipeStore from './recipeStore';
 
-  const RecipeDetails = ({ recipeId }) => {
-    const recipe = useRecipeStore(state =>
-      state.recipes.find(recipe => recipe.id === recipeId)
-    );
+function RecipeDetails({ recipe }) {
+  const { favorites, addToFavorites, removeFromFavorites } = useRecipeStore();
 
-    return (
-      <div>
-        <h1>{recipe.title}</h1>
-        <p>{recipe.description}</p>
-        {/* Render EditRecipeForm and DeleteRecipeButton here */}
-      </div>
-    );
-  };
+  const isFavorite = favorites.includes(recipe.id);
+
+  return (
+    <div>
+      <h2>{recipe.name}</h2>
+      {/* Other recipe details */}
+      {isFavorite ? (
+        <button onClick={() => removeFromFavorites(recipe.id)}>Remove from Favorites</button>
+      ) : (
+        <button onClick={() => addToFavorites(recipe.id)}>Add to Favorites</button>
+      )}
+    </div>
+  );
+}
 
 export default RecipeDetails;

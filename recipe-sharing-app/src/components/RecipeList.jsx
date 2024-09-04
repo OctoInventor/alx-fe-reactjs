@@ -1,15 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import useRecipeStore from './recipeStore'; // Import useRecipeStore for accessing the store
+//import { Link } from 'react-router-dom'; // Import Link for navigation
+import useRecipeStore from './recipeStore.js'; // Import useRecipeStore for accessing the store
 
-const RecipeList = ({ filteredRecipes = [] }) => {
-  const { deleteRecipe } = useRecipeStore((state) => ({
-    deleteRecipe: state.deleteRecipe,
-  }));
-
-  const handleDelete = (id) => {
-    deleteRecipe(id); // Call the deleteRecipe action from Zustand store
-  };
+function RecipeList() {
+  const { recipes, favorites, addToFavorites, removeFromFavorites } = useRecipeStore();
 
   return (
     <div>
@@ -39,16 +33,16 @@ const RecipeList = ({ filteredRecipes = [] }) => {
         <br />
         · Cheese and Charcuterie Board: Create a platter with various European cheeses, cured meats, olives, and crusty bread. </h4>
 
-      <ul>
-        {filteredRecipes.map((recipe, index) => (
-          <li key={index}>
-            <h3>{recipe.name}</h3>
-            <p>{recipe.description}</p>
-            <button onClick={() => handleDelete(recipe.id)}>Delete</button> {/* Add a delete button */}
-            <Link to={`/edit/${recipe.id}`}>Edit</Link> {/* Link to the EditRecipeForm component */}
-          </li>
-        ))}
-      </ul>
+        <ul>
+      {recipes.map((recipe) => (
+        <li key={recipe.id}>
+          {recipe.name}
+          <button onClick={() => addToFavorites(recipe.id)}>Add to Favorites</button>
+          <button onClick={() => removeFromFavorites(recipe.id)}>Remove from Favorites</button>
+          {favorites.includes(recipe.id) && <span>★</span>}
+        </li>
+      ))}
+    </ul>
     </div>
   );
 };
