@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'; // Import Router, Route, Routes, and Link
 import RecipeDetails from './components/RecipeDetails'; // Import RecipeDetails
+import AddRecipeForm from './components/AddRecipeForm'; // Import AddRecipeForm
 import './App.css';
 
 const USERS = [
@@ -29,6 +30,10 @@ function App() {
   return (
     <Router>
       <div className="container">
+        <nav>
+          <Link to="/">Home</Link> | <Link to="/add-recipe">Add Recipe</Link>
+        </nav>
+        
         <input
           type="search"
           value={name}
@@ -54,14 +59,10 @@ function App() {
         </div>
 
         <Routes>
-          <Route
-            path="/user/:id"
-            element={<RecipeDetails />} // Component for user details
-          />
-          <Route
-            path="*"
-            element={<h1>404 Not Found</h1>} // Catch-all route for 404 errors
-          />
+          <Route path="/" element={<h1>Welcome to My Recipe App</h1>} />
+          <Route path="/add-recipe" element={<AddRecipeForm />} /> {/* Route for AddRecipeForm */}
+          <Route path="/user/:id" element={<RecipeDetails />} /> {/* Route for RecipeDetails */}
+          <Route path="*" element={<h1>404 Not Found</h1>} /> {/* Catch-all route for 404 errors */}
         </Routes>
       </div>
     </Router>
