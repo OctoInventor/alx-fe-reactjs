@@ -1,5 +1,5 @@
 import React from 'react';
-import useRecipeStore from '../store/recipeStore'; // Adjust the import path
+import useRecipeStore from './store/recipeStore'; // Adjust the import path
 
 const SearchBar = () => {
   const { searchTerm, setSearchTerm, filterRecipes } = useRecipeStore();
