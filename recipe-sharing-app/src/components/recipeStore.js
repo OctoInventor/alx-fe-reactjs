@@ -20,6 +20,7 @@ const useRecipeStore = create((set) => ({
     { id: 'cranberry-orange-scones', name: 'Cranberry Orange Scones' },
   ],
   favorites: [],
+  recommendations: [], // Added recommendations section
 
   addToFavorites: (recipeId) => {
     set((state) => ({ favorites: [...state.favorites, recipeId] }));
@@ -27,6 +28,14 @@ const useRecipeStore = create((set) => ({
 
   removeFromFavorites: (recipeId) => {
     set((state) => ({ favorites: state.favorites.filter((id) => id !== recipeId) }));
+  },
+
+  addRecommendation: (recipeId) => {
+    set((state) => ({ recommendations: [...state.recommendations, recipeId] }));
+  },
+
+  removeRecommendation: (recipeId) => {
+    set((state) => ({ recommendations: state.recommendations.filter((id) => id !== recipeId) }));
   },
 }));
 
