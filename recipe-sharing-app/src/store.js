@@ -1,22 +1,15 @@
-// store.js
 import create from 'zustand';
 
 const useRecipeStore = create((set) => ({
-  recipes: [], // Your existing recipe data
-  favorites: [], // Initialize an empty array for favorites
+  recipes: [], // Your recipe data (replace with actual data)
+  favorites: [],
 
-  // Other actions (fetching recipes, adding/removing favorites, etc.)
-  // ...
   addToFavorites: (recipeId) => {
-    set((state) => ({
-      favorites: [...state.favorites, recipeId],
-    }));
+    set((state) => ({ favorites: [...state.favorites, recipeId] }));
   },
 
   removeFromFavorites: (recipeId) => {
-    set((state) => ({
-      favorites: state.favorites.filter((id) => id !== recipeId),
-    }));
+    set((state) => ({ favorites: state.favorites.filter((id) => id !== recipeId) }));
   },
 }));
 

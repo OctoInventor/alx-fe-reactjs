@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'; // Import Router, Route, Routes, and Link
 import RecipeDetails from './components/RecipeDetails'; // Import RecipeDetails
 import AddRecipeForm from './components/AddRecipeForm'; // Import AddRecipeForm
+//import FavoritesList from './components/FavoritesList';
+//import RecommendationsList from './components/RecommendationsList';
 import './App.css';
 
 const USERS = [
