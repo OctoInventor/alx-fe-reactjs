@@ -1,9 +1,7 @@
 import React from 'react';
-import useRecipeStore from './recipeStore';
 
-function RecipeList() {
-  const recipes = useRecipeStore((state) => state.recipes);
-
+// Assuming filteredRecipes is a prop
+const RecipeList = ({ filteredRecipes = [] }) => {
   return (
     <div>
       <h2>Recipe List</h2>
@@ -31,8 +29,9 @@ function RecipeList() {
         · Russian Tea Cakes: Buttery, nutty cookies rolled in powdered sugar.
         <br />
         · Cheese and Charcuterie Board: Create a platter with various European cheeses, cured meats, olives, and crusty bread. </h4>
+
       <ul>
-        {recipes.map((recipe, index) => (
+        {filteredRecipes.map((recipe, index) => (
           <li key={index}>
             <h3>{recipe.name}</h3>
             <p>{recipe.description}</p>
@@ -41,6 +40,6 @@ function RecipeList() {
       </ul>
     </div>
   );
-}
+};
 
 export default RecipeList;
