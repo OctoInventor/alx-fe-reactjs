@@ -1,29 +1,21 @@
 import React, { useState } from 'react';
 
 function RegistrationForm() {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Basic validation: Check if any field is empty
-    if (!formData.username || !formData.email || !formData.password) {
+    if (!username || !email || !password) {
       alert('Please fill in all fields before submitting.');
       return;
     }
 
     // Handle form submission (e.g., send data to the server)
-    console.log('Form submitted:', formData);
+    console.log('Form submitted:', { username, email, password });
   };
 
   return (
@@ -34,8 +26,8 @@ function RegistrationForm() {
           type="text"
           id="username"
           name="username"
-          value={formData.username}
-          onChange={handleChange}
+          value={username}  // Using value={username} here
+          onChange={(e) => setUsername(e.target.value)}  // Updates username state
         />
       </div>
       <div>
@@ -44,8 +36,8 @@ function RegistrationForm() {
           type="email"
           id="email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}  // Using value={email} here
+          onChange={(e) => setEmail(e.target.value)}  // Updates email state
         />
       </div>
       <div>
@@ -54,8 +46,8 @@ function RegistrationForm() {
           type="password"
           id="password"
           name="password"
-          value={formData.password}
-          onChange={handleChange}
+          value={password}  // Using value={password} here
+          onChange={(e) => setPassword(e.target.value)}  // Updates password state
         />
       </div>
       <button type="submit">Register</button>
