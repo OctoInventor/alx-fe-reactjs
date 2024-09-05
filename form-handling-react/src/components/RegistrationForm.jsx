@@ -4,15 +4,29 @@ function RegistrationForm() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({}); // State to hold validation errors
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    let validationErrors = {};
 
-    // Basic validation: Check if any field is empty
-    if (!username || !email || !password) {
-      alert('Please fill in all fields before submitting.');
+    // Validation for email and password
+    if (!email) {
+      validationErrors.email = 'Email is required';
+    }
+    
+    if (!password) {
+      validationErrors.password = 'Password is required';
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
+
+    // Clear errors if validation passes
+    setErrors({});
 
     // Handle form submission (e.g., send data to the server)
     console.log('Form submitted:', { username, email, password });
@@ -26,8 +40,8 @@ function RegistrationForm() {
           type="text"
           id="username"
           name="username"
-          value={username}  // Using value={username} here
-          onChange={(e) => setUsername(e.target.value)}  // Updates username state
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </div>
       <div>
@@ -36,9 +50,10 @@ function RegistrationForm() {
           type="email"
           id="email"
           name="email"
-          value={email}  // Using value={email} here
-          onChange={(e) => setEmail(e.target.value)}  // Updates email state
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
+        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>} {/* Display email error */}
       </div>
       <div>
         <label htmlFor="password">Password:</label>
@@ -46,9 +61,10 @@ function RegistrationForm() {
           type="password"
           id="password"
           name="password"
-          value={password}  // Using value={password} here
-          onChange={(e) => setPassword(e.target.value)}  // Updates password state
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
+        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>} {/* Display password error */}
       </div>
       <button type="submit">Register</button>
     </form>
