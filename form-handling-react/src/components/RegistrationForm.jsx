@@ -11,7 +11,11 @@ function RegistrationForm() {
     
     let validationErrors = {};
 
-    // Validation for email and password
+    // Validation for username, email, and password
+    if (!username) {
+      validationErrors.username = 'Username is required';
+    }
+    
     if (!email) {
       validationErrors.email = 'Email is required';
     }
@@ -43,6 +47,7 @@ function RegistrationForm() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>} {/* Display username error */}
       </div>
       <div>
         <label htmlFor="email">Email:</label>
