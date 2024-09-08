@@ -1,32 +1,37 @@
 // src/__tests__/TodoList.test.js
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom'; // Ensure this import is here
-import TodoList from '../components/TodoList'; // Adjust the path based on your project structure
+import '@testing-library/jest-dom'; // for the .toBeInTheDocument() matcher
+import TodoList from '../components/TodoList'; // adjust path as necessary
 
 describe('TodoList component', () => {
-  it('renders todos and deletes a todo', () => {
-    // Mock todos data
+  it('renders todos and allows a todo to be deleted', () => {
+    // Sample todos and mock function
     const todos = [
       { id: 1, text: 'Conquer the dragon', completed: false },
       { id: 2, text: 'Retrieve the lost artifact', completed: true },
       { id: 3, text: 'Brew a potion of courage', completed: false },
     ];
 
-    // Mock the onDeleteTodo function
-    const mockDeleteTodo = jest.fn();
+    const mockDeleteTodo = jest.fn(); // Mock function to simulate deleting a todo
 
-    // Render the TodoList component
-    const { getByText, getAllByText } = render(<TodoList todos={todos} onDeleteTodo={mockDeleteTodo} />);
+    const { getByText, queryByText } = render(
+      <TodoList todos={todos} onDeleteTodo={mockDeleteTodo} />
+    );
 
-    // Ensure a todo item is rendered
+    // Check if todos are rendered
     expect(getByText('Retrieve the lost artifact')).toBeInTheDocument();
+    expect(getByText('Conquer the dragon')).toBeInTheDocument();
+    expect(getByText('Brew a potion of courage')).toBeInTheDocument();
 
-    // Get all "Delete" buttons and click the second one (assuming the 2nd item should be deleted)
-    const deleteButtons = getAllByText('Delete');
-    fireEvent.click(deleteButtons[1]); // Click the second delete button
+    // Simulate clicking the delete button for the second todo
+    const deleteButton = getByText('Retrieve the lost artifact').closest('li').querySelector('button');
+    fireEvent.click(deleteButton);
 
-    // Ensure the mockDeleteTodo function is called with the correct id
-    expect(mockDeleteTodo).toHaveBeenCalledWith(2); // Expect the second todo (id: 2) to be deleted
+    // Verify that the delete function was called with the correct id
+    expect(mockDeleteTodo).toHaveBeenCalledWith(2);
+
+    // Check if the todo item is removed from the document
+    expect(queryByText('Retrieve the lost artifact')).not.toBeInTheDocument();
   });
 });
