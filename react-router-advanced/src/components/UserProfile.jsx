@@ -1,14 +1,12 @@
 // UserProfile.js
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
 function UserProfile() {
-  const { username } = useParams();
-
+  // Fetch user data or display relevant content
   return (
     <div>
-      <h2>User Profile: {username}</h2>
-      <Link to="/profile/johndoe">John Doe's Profile</Link>
+      <h2>User Profile</h2>
+      {/* Display user information */}
     </div>
   );
 }
