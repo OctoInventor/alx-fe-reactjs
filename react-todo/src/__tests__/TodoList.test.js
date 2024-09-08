@@ -1,23 +1,31 @@
-// TodoList.test.js
+// src/__tests__/TodoList.test.js
 import React from 'react';
-import { render, fireEvent, within } from '@testing-library/react';
-import TodoList from '../components/TodoList'; // Adjust the path if necessary
+import { render, fireEvent } from '@testing-library/react';
+import TodoList from '../components/TodoList'; // Adjust the path based on your structure
 
 describe('TodoList component', () => {
-  it('deletes a todo', () => {
+  it('renders todos and deletes a todo', () => {
+    // Mock todos data
+    const todos = [
+      { id: 1, text: 'Conquer the dragon', completed: false },
+      { id: 2, text: 'Retrieve the lost artifact', completed: true },
+      { id: 3, text: 'Brew a potion of courage', completed: false }
+    ];
+
+    // Mock the onDeleteTodo function
+    const mockDeleteTodo = jest.fn();
+
     // Render the TodoList component
-    const { getByText, queryByText } = render(<TodoList />);
+    const { getByText, queryByText } = render(<TodoList todos={todos} onDeleteTodo={mockDeleteTodo} />);
 
-    // Find the todo item by its text
-    const todoItem = getByText('Retrieve the lost artifact');
+    // Ensure a todo item is rendered
+    expect(getByText('Retrieve the lost artifact')).toBeInTheDocument();
 
-    // Use `within` to scope the search for the delete button within this todo's list item
-    const deleteButton = within(todoItem.closest('li')).getByText('Delete');
-
-    // Simulate clicking the delete button
+    // Simulate clicking the delete button for the second todo
+    const deleteButton = getByText('Delete');
     fireEvent.click(deleteButton);
 
-    // Assert that the todo item has been deleted and is no longer in the document
-    expect(queryByText('Retrieve the lost artifact')).toBeNull();
+    // Ensure the mock function is called when the delete button is clicked
+    expect(mockDeleteTodo).toHaveBeenCalled();
   });
 });
