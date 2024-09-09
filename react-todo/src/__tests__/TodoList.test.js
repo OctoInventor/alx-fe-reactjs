@@ -1,32 +1,51 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import TodoList from '../components/TodoList'; // Adjust the path as necessary
+import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import TodoList from '../components/TodoList';
 
 describe('TodoList component', () => {
-  it('renders todos and allows a todo to be deleted', () => {
-    const mockDeleteTodo = jest.fn();
+  test('renders todos and allows a todo to be deleted', () => {
+    render(<TodoList />);
     
-    const todos = [
-      { id: 1, text: 'Buy Groceries from the store', completed: false },
-      { id: 2, text: 'Another todo', completed: false },
-    ];
+    // Ensure initial todos are rendered
+    expect(screen.getByText('Retrieve the lost artifact')).toBeInTheDocument();
+    expect(screen.getByText('Conquer the dragon')).toBeInTheDocument();
+    expect(screen.getByText('Brew a potion of courage')).toBeInTheDocument();
 
-    render(<TodoList todos={todos} onDeleteTodo={mockDeleteTodo} />);
+    // Simulate clicking the delete button for the first todo
+    fireEvent.click(screen.getAllByText('Delete')[0]);
 
-    // Debug the initial render
-    screen.debug();
+    // Check if the todo item is removed from the document
+    expect(screen.queryByText('Retrieve the lost artifact')).not.toBeInTheDocument();
+  });
 
-    expect(screen.getByText('Buy Groceries from the store')).toBeInTheDocument();
+  test('allows a todo to be added', () => {
+    render(<TodoList />);
+    
+    // Add a new todo
+    fireEvent.change(screen.getByPlaceholderText('Add a new todo...'), { target: { value: 'New Todo' } });
+    fireEvent.click(screen.getByText('Add'));
 
-    const deleteButtons = screen.getAllByText('Delete');
-    fireEvent.click(deleteButtons[0]);
+    // Ensure the new todo is rendered
+    expect(screen.getByText('New Todo')).toBeInTheDocument();
+  });
 
-    expect(mockDeleteTodo).toHaveBeenCalledWith(1);
+  test('allows a todo to be toggled between completed and not completed', () => {
+    render(<TodoList />);
+    
+    // Ensure the todo is initially not completed
+    expect(screen.getByText('Retrieve the lost artifact')).toHaveStyle('text-decoration: none');
 
-    // Debug the DOM after the delete operation
-    screen.debug();
+    // Toggle the todo
+    fireEvent.click(screen.getByText('Retrieve the lost artifact'));
 
-    //expect(screen.queryByText('Buy Groceries from the store')).not.toBeInTheDocument();
+    // Ensure the todo is now completed
+    expect(screen.getByText('Retrieve the lost artifact')).toHaveStyle('text-decoration: line-through');
+
+    // Toggle the todo again
+    fireEvent.click(screen.getByText('Retrieve the lost artifact'));
+
+    // Ensure the todo is back to not completed
+    expect(screen.getByText('Retrieve the lost artifact')).toHaveStyle('text-decoration: none');
   });
 });
