@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <div className= "bg-gray-100 p-8 max-w-sm-400 max-auto my-20 rounded-lg shawdow-lg">
+      <div>
           <UserProfile/>
       </div>
     </>
