@@ -1,6 +1,5 @@
 import React from 'react';
 import RecipeList from './RecipeList';
-import RecipeCard from './RecipeCard';
 
 const HomePage = () => {
   return (
