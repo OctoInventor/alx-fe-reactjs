@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, } from 'react';
+import data from '../data.json';
 import RecipeList from './RecipeList';
 
 const HomePage = () => {
