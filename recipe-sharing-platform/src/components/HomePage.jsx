@@ -12,22 +12,14 @@ const HomePage = () => {
         Explore your favorite recipes and discover new ones!
       </p>
 
-      {/* Displaying recipes in a flex layout without using grid */}
-      <div className="flex flex-wrap justify-center">
-        <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-          <div key={data[0].id} className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="font-bold text-xl">{data[0].title}</h2>
-            <p className="mt-2 text-gray-600">{data[0].summary}</p>
+      {/* Displaying recipes using map and grid layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {data.map(recipe => (
+          <div key={recipe.id} className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="font-bold text-xl">{recipe.title}</h2>
+            <p className="mt-2 text-gray-600">{recipe.summary}</p>
           </div>
-        </div>
-
-        <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-          <div key={data[1].id} className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="font-bold text-xl">{data[1].title}</h2>
-            <p className="mt-2 text-gray-600">{data[1].summary}</p>
-          </div>
-        </div>
-        {/* Add more recipes manually if needed */}
+        ))}
       </div>
 
       {/* Recipe List */}
