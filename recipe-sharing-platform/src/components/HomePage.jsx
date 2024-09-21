@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import data from '../data.json';
 import RecipeList from './RecipeList';
 
@@ -26,9 +27,11 @@ const HomePage = () => {
       <RecipeList />
 
       {/* Floating Action Button for Adding New Recipe */}
+      <Link to="/add-recipe">
       <button className="fixed bottom-5 right-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full shadow-lg transition duration-300 ease-in-out">
         +
       </button>
+      </Link>
     </div>
   );
 };
