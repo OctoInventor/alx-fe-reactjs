@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const RecipeDetail = ({ match }) => {
+    const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
 
     useEffect(() => {
