@@ -12,8 +12,8 @@ const HomePage = () => {
         Explore your favorite recipes and discover new ones!
       </p>
 
-      {/* Displaying recipes using map and grid layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Displaying recipes using map and grid layout, including the "sm" class */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {data.map(recipe => (
           <div key={recipe.id} className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="font-bold text-xl">{recipe.title}</h2>
