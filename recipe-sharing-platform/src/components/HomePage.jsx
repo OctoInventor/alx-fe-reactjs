@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from 'react';
+import React, { useState, useEffect } from 'react';
 import data from '../data.json';
 import RecipeList from './RecipeList';
 
@@ -12,6 +12,17 @@ const HomePage = () => {
         Explore your favorite recipes and discover new ones!
       </p>
 
+      {/* Displaying recipes manually without using map */}
+      <div key={data[0].id}>
+        <h2>{data[0].title}</h2>
+        <p>{data[0].summary}</p>
+      </div>
+      <div key={data[1].id}>
+        <h2>{data[1].title}</h2>
+        <p>{data[1].summary}</p>
+      </div>
+      {/* Add more recipes manually if needed */}
+
       {/* Recipe List */}
       <RecipeList />
 
@@ -23,4 +34,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage
+export default HomePage;
